@@ -1,4 +1,4 @@
-import {IGuildConfig} from './src/database/models/GuildConfig'
+import {IGuildConfig} from '../database/models/GuildConfig'
 
 declare module "discord.js" {
   export interface Client {
