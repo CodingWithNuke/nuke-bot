@@ -7,11 +7,13 @@ import { Command } from '../types'
 import fs from 'fs';
 
 export default (client: Client) => {
-  fs.readdirSync(`${__dirname}/../commands`).forEach(category => {
+  fs.readdirSync(`${__dirname}/../commands`).forEach(async category => {
     const commands = fs.readdirSync(`${__dirname}/../commands/${category}`).filter(file => file.endsWith('.ts'));
   
     for (let file of commands) {
-      const command: Command = require(`../commands/${category}/${file}`).default;
+      // @ts-ignore
+      const command: Command = (await import(`../commands/${category}/${file}`)).default;
+      
       client.categories.add(category);
   
       if (command.name) {

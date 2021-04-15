@@ -5,6 +5,7 @@ import { Client, Message, MessageEmbed } from "discord.js";
 import { Command } from "../../types";
 
 import ms from "ms";
+import { COLORS } from '../../utils/constants';
 import { findOrFetchGuild } from "../../utils/helpers";
 
 export default {
@@ -15,7 +16,7 @@ export default {
   cooldown: 1000,
   disabled: false,
   permissions: {
-    bot: [],
+    bot: ["EMBED_LINKS"],
     user: [],
     ownerOnly: false,
     guildOwnerOnly: false
@@ -25,7 +26,7 @@ export default {
     const guildConfig = await findOrFetchGuild(client, message.guild!.id);
 
     const embed = new MessageEmbed();
-    embed.setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic: true, size: 64}))
+    embed.setColor(COLORS.BLUE)
 
     if (!args.length) {
       embed.setFooter(
@@ -42,7 +43,8 @@ export default {
           client.commands
             .filter((cmd) => cmd.category == category.toLowerCase())
             .map((cmd) => `\`${guildConfig.prefix}${cmd.name}\``)
-            .join("\n")
+            .join("\n"),
+          true
         );
       });
 

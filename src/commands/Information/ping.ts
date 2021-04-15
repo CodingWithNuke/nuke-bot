@@ -13,7 +13,7 @@ export default {
   cooldown: 3000,
   disabled: false,
   permissions: {
-    bot: [],
+    bot: ["EMBED_LINKS"],
     user: [],
     ownerOnly: false,
     guildOwnerOnly: false
