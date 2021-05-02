@@ -6,13 +6,13 @@ import { Command } from "../../types";
 
 import ms from "ms";
 import { COLORS } from '../../utils/constants';
-import { findOrFetchGuild } from "../../utils/helpers";
+import { findOrFetchGuild } from "../../utils/guild";
 
 export default {
   name: "help",
   aliases: ["commands"],
   usage: "help (command)",
-  description: "Help",
+  description: "Get a list of commands or information about a single command.",
   cooldown: 1000,
   disabled: false,
   permissions: {
@@ -63,16 +63,16 @@ export default {
       embed.setFooter(`[] = Required, () = Optional`);
 
       const descriptionArray = [];
+      if (cmd.description) {
+        descriptionArray.push(`${cmd.description}\n`);
+      }
+
       if (cmd.category) {
         descriptionArray.push(
           `**Category:** ${
             cmd.category[0].toUpperCase() + cmd.category.slice(1).toLowerCase()
           }`
         );
-      }
-
-      if (cmd.description) {
-        descriptionArray.push(`**Description:** ${cmd.description}`);
       }
 
       if (cmd.cooldown) {
