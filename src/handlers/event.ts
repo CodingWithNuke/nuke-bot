@@ -1,11 +1,10 @@
 import { Client } from 'discord.js';
-import fs from 'fs'
+import { promises as fs } from 'fs'
 
-export default (client: Client) => {
-  fs.readdirSync(`${__dirname}/../events`).forEach(async file => {
+export default async (client: Client) => {
+  (await fs.readdir(`${__dirname}/../events`)).forEach(async file => {
     if (!file.endsWith('.ts')) return;
-    
-    // @ts-ignore
+
     const event = (await import(`../events/${file}`)).default;
     const eventName = file.split('.')[0];
     
