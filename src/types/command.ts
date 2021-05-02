@@ -3,7 +3,7 @@ import { Client, Message, PermissionString } from "discord.js";
 export interface Command {
   name: string;
   aliases?: string[] | [];
-  usage?: string;
+  usage?: string | string[];
   description?: string;
   category?: string;
   cooldown?: number;
