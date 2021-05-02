@@ -17,9 +17,9 @@ client.owners = config.owners;
 import database from './database';
 database();
 
-fs.readdirSync(`${__dirname}/handlers`).forEach(file => {
+fs.readdirSync(`${__dirname}/handlers`).forEach(async file => {
   if (!file.endsWith('.ts')) return;
-  require(`${__dirname}/handlers/${file}`).default(client);
+  (await import(`${__dirname}/handlers/${file}`)).default(client)
 })
 
 client.login(process.env.TOKEN)
