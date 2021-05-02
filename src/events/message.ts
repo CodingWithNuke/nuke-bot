@@ -4,7 +4,7 @@ import { Command } from './../types/command';
 
 import ms from 'ms';
 
-import { findOrFetchGuild } from '../utils/helpers';
+import { findOrFetchGuild } from '../utils/guild';
 
 export default {
   run: async (client: Client, message: Message) => {
