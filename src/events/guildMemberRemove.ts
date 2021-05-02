@@ -1,6 +1,6 @@
 import { Client, GuildMember } from "discord.js";
 
-import { findOrFetchGuild } from "../utils/helpers";
+import { findOrFetchGuild } from "../utils/guild";
 
 export default {
   run: async (client: Client, member: GuildMember) => {
@@ -10,7 +10,7 @@ export default {
 
     const welcomeChannel = member.guild.channels.cache.get(guildConfig?.welcomeChannel) || member.guild.channels.resolve(guildConfig?.welcomeChannel!);
     
-    if (welcomeChannel?.isText()) {
+    if (welcomeChannel && welcomeChannel.isText()) {
       welcomeChannel.send(`Goodbye, <@${member.user.id}>.`)
     }
   },
