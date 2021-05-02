@@ -4,13 +4,13 @@ import { Client } from "discord.js";
 // Types
 import { Command } from '../types'
 
-import fs from 'fs';
+import { promises as fs } from 'fs';
 
-export default (client: Client) => {
-  fs.readdirSync(`${__dirname}/../commands`).forEach(async category => {
-    const commands = fs.readdirSync(`${__dirname}/../commands/${category}`).filter(file => file.endsWith('.ts'));
+export default async (client: Client) => {
+  (await fs.readdir(`${__dirname}/../commands`)).forEach(async category => {
+    const commandFiles = (await fs.readdir(`${__dirname}/../commands/${category}`)).filter(file => file.endsWith('.ts'));
   
-    for (let file of commands) {
+    for (let file of commandFiles) {
       // @ts-ignore
       const command: Command = (await import(`../commands/${category}/${file}`)).default;
       
